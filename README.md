@@ -119,11 +119,14 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 
 `receptor_out/`: Prepared PDBQT receptor files.
 
+`ligand`: Prepared PDB ligand files from `.sdf` format.
+
 `ligand_out/`: Prepared PDBQT ligand files.
 
-`output/`: Subfolders for each receptor containing _out.pdbqt docking results.
+`output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
