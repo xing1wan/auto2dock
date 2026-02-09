@@ -47,7 +47,7 @@ This repository provides an automated workflow for high-throughput molecular doc
 - `sdf/`: Input folder for ligand files in `.sdf` format.
 
 
-- `reference`: Crystal structure for your proteins
+- `reference/`: Folder to save the crystal structure as reference for your proteins
 
 🛠️ **Setup & Usage**
 
@@ -124,5 +124,6 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing _out.pdbqt docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
