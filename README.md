@@ -1,7 +1,6 @@
-# auto2dock
+# auto2dock - Automated Molecular Docking & Analysis Pipeline
 This repository provides an automated workflow for high-throughput molecular docking using AutoDock Vina and MGLTools. The pipeline is designed to handle protein structures with multiple conformations, standardize receptor (protein) and ligand preparation, and perform batch analysis of docking results.
-# Automated Molecular Docking & Analysis Pipeline
-This repository contains a high-throughput workflow for automated molecular docking and spatial analysis using AutoDock Vina, MGLTools, and PyMOL. It is designed to streamline the transition from raw structural files to comprehensive binding data.
+
 
 🚀 **Key Features**
 
@@ -120,3 +119,4 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing _out.pdbqt docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
