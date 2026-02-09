@@ -27,6 +27,8 @@ This repository provides an automated workflow for high-throughput molecular doc
 
 - `automated_docking.bat`: The main entry point for the pipeline.
 
+- `automated_analysis.bat`: Optimal data analysis tool
+
 - `scripts/`: Contains custom Python helpers:
 
 
@@ -42,7 +44,10 @@ This repository provides an automated workflow for high-throughput molecular doc
 - `receptor/`: Input folder for raw PDB protein files.
 
 
-- `ligand/`: Input folder for ligand files.
+- `sdf/`: Input folder for ligand files in `.sdf` format.
+
+
+- `reference`: Crystal structure for your proteins
 
 🛠️ **Setup & Usage**
 
@@ -119,4 +124,5 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing _out.pdbqt docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
