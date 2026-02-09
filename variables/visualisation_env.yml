@@ -1,0 +1,8 @@
+name: visualisation_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14.0
+  - matplotlib=3.10.6
+  - seaborn=0.13.2
+  - pandas=2.3.3
