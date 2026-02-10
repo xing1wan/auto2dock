@@ -51,7 +51,7 @@ This repository provides an automated workflow for high-throughput molecular doc
 
 ## 🛠️ **Setup & Usage**
 
-***1. Configuration***
+### ***1. Configuration***
 
 Edit `.\variables\settings.txt` to define your local installation paths for:
 
@@ -63,7 +63,7 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
   
   - Check more details in the README.md file
 
-  - You need to have the following installed: MGL, PyMOL, Vina, and anaconda
+  - You need to have the following installed: MGL tools ([https://ccsb.scripps.edu/mgltools/downloads/](url)), PyMOL ([https://www.pymol.org/](url)), Vina ([https://vina.scripps.edu/downloads/](url)), and Anaconda ([https://www.anaconda.com/download](url))
 
     - Find in MGL installation path the python.exe and Utilities24 folder, replace the texts in settings.txt
     e.g.
@@ -102,6 +102,7 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
         ```
         REF_PDB=.\reference\3o5b_pdb.ent
         ```
+    **‼️NOTE‼️This pipeline has been tested on MGL win32_1.5.7 (Python 2.7.11), Vina 1_1_2_win32, PyMOL 3.1.6.1, and Anaconda Navigator 2.7.0 (conda 24.11.3, Python 3.12.7)** 
 
 
 
@@ -137,6 +138,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
