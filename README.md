@@ -82,7 +82,7 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
     - Find in PyMOL installation path the PyMOLWin.exe, it might be slightly different, but should be one which opens PyMOL GUI, replace the texts in settings.txt
     e.g.
         ```
-        PYMOL_EXE=C:\Users\wanx1\AppData\Local\pymol\PyMOLWin.exe
+        PYMOL_EXE=C:\Users\xxxx\AppData\Local\pymol\PyMOLWin.exe
         ```
     
     - Anaconda can be installed with your own choices, open cmd (win+R) then find where is conda, by typing "where conda" and enter, replace the texts in settings.txt
@@ -138,6 +138,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
