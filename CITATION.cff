@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "WAN"
+  given-names: "Xing"
+  orcid: "https://orcid.org/0000-0001-7551-9956"
+
+title: "auto2dock"
+version: 1.0.0
+date-released: 2026-02-11
+url: "https://github.com/xing1wan/auto2dock"
