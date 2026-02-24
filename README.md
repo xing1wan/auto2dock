@@ -109,6 +109,18 @@ Set your docking search grid dimensions in `.\variables\variables.txt`. The cent
 
 ### ***3. Run the Pipeline***
 
+Double-click `preclean_pdb.bat`. The script will:
+
+  - Download PDBs based on your search words.
+
+  - Clean PDB files and synchronise their positions according to your protein.
+
+  - Identify ligands bound in the clean PDBs, and find centroid of those ligands.
+
+  - Identify the most similar crystal structure to your protein. 
+
+  - Update the centroid to vina's parameters in `variables\variables.txt`, and update the most similar crystal structure as reference in `variables\settings.txt`
+
 Double-click `automated_docking.bat`. The script will:
 
   - Load your configuration paths.
@@ -143,6 +155,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
