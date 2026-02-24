@@ -40,7 +40,7 @@ def batch_superimpose(input_folder, settings_path, output_folder):
     cmd.load(target_pdb_path, target_internal_name)
     print(f"Target loaded as: {target_internal_name}")
 
-    files = [f for f in os.listdir(input_folder) if f.endswith(('.ent', '.pdb'))]
+    files = [f for f in os.listdir(input_folder) if f.endswith(('.pdb'))]
     results = []
 
     # NEW: Track processed base names to avoid duplicates

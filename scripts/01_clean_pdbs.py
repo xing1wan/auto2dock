@@ -31,13 +31,16 @@ def clean_and_rename_pdbs(input_folder, output_folder, settings_path):
     target_internal_name = "REFERENCE_TARGET"
     cmd.delete("all")
     cmd.load(target_pdb_path, target_internal_name)
+    # Define a list of common crystallization buffers and ions to remove
+    unwanted_ligands = ["PO4", "SO4", "ACT", "GOL", "EDO", "PEG"]
     
     # Calculate threshold: 60% of target chain A length
     ref_ca_count = cmd.count_atoms(f"{target_internal_name} and chain A and polymer.protein and name CA")
-    min_length = ref_ca_count * 0.6
-    print(f"Target CA count: {ref_ca_count}. Min threshold: {min_length:.1f}")
+    min_length = ref_ca_count * 0.5
+    max_length = ref_ca_count * 1.5
+    print(f"Target CA count: {ref_ca_count}. Min threshold: {min_length:.1f}, max threshold: {max_length:.1f}")
 
-    files = [f for f in os.listdir(input_folder) if f.endswith('.ent')]
+    files = [f for f in os.listdir(input_folder) if f.endswith('.pdb')]
 
     for f in files:
         try:
@@ -63,22 +66,31 @@ def clean_and_rename_pdbs(input_folder, output_folder, settings_path):
                 print(f"Skipping {f}: Chain {first_chain} too short ({residue_count} < {min_length:.0f})")
                 cmd.delete(temp_obj)
                 continue
+            
+            elif residue_count > max_length:
+                print(f"Skipping {f}: Chain {first_chain} too long ({residue_count} > {max_length:.0f})")
+                cmd.delete(temp_obj)
+                continue
 
             # 4. Processing
             new_filename = f.replace('pdb', '', 1) if f.startswith('pdb') else f
             pdb_id = new_filename.split('.')[0]
             
-            # Rename and Clean
+            # Rename superimpose and Clean
             cmd.set_name(temp_obj, pdb_id)
+            cmd.super(pdb_id, target_internal_name)            
             cmd.remove(f"{pdb_id} and not chain {first_chain}")
             cmd.remove(f"{pdb_id} and solvent")
+            # 3. Remove specific unwanted ligands like PO4
+            for lig in unwanted_ligands:
+                cmd.remove(f"{pdb_id} and resn {lig}")
             cmd.remove(f"{pdb_id} and h.") # Optional: remove hydrogens to keep files small
 
             # 5. Save
             output_path = os.path.join(output_folder, f"{pdb_id}.pdb")
             cmd.save(output_path, pdb_id)
+
             print(f"Successfully processed: {pdb_id} (Chain {first_chain}, {residue_count} residues)")
-            
             # Clean up for next iteration
             cmd.delete(pdb_id)
 
