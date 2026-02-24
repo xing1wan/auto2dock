@@ -34,7 +34,6 @@ echo Using reference protein: %REF_PDB%
 :: Data folders used by the scripts 
 set "OUTPUT_DIR=.\output"
 set "RECEPTOR_DIR=.\receptor"
-@REM set "TEMP_DIR=.\reference"
 set "RESULTS_DIR=.\results"
 set "VAR=.\variables"
 set "SCR_DIR=.\scripts"
@@ -63,19 +62,19 @@ if not exist "%CONDA_BAT%" (
     exit /b
 )
 
-echo ========================================
-echo SETTING UP LOCAL ENVIRONMENT
-echo ========================================
-:: Check if the environment directory exists in the conda info list
-call "%CONDA_BAT%" info --envs | findstr /l /c:"%ENV_NAME%" >nul
+@REM echo ========================================
+@REM echo SETTING UP LOCAL ENVIRONMENT
+@REM echo ========================================
+@REM :: Check if the environment directory exists in the conda info list
+@REM call "%CONDA_BAT%" info --envs | findstr /l /c:"%ENV_NAME%" >nul
 
-if %errorlevel% equ 0 (
-    echo [INFO] Environment '%ENV_NAME%' already exists. Activating...
-    call "%CONDA_BAT%" activate %ENV_NAME% 
-) else (
-    echo [INFO] Environment '%ENV_NAME%' not found. Creating...
-    call "%CONDA_BAT%" env create -n %ENV_NAME% -f "%VAR%\visualisation_env.yml" -y
-)
+@REM if %errorlevel% equ 0 (
+@REM     echo [INFO] Environment '%ENV_NAME%' already exists. Activating...
+@REM     call "%CONDA_BAT%" activate %ENV_NAME% 
+@REM ) else (
+@REM     echo [INFO] Environment '%ENV_NAME%' not found. Creating...
+@REM     call "%CONDA_BAT%" env create -n %ENV_NAME% -f "%VAR%\visualisation_env.yml" -y
+@REM )
 
 @REM echo.
 @REM pause
@@ -100,7 +99,9 @@ echo ========================================
 :: We use 'conda run' to execute the script inside the env without "activating" it manually
 call "%CONDA_BAT%" run -n %ENV_NAME% python "%SCR_DIR%\visualise_vina.py" --R "%RESULTS_DIR%"
 dir "%RESULTS_DIR%"
-pause
+echo.
+choice /c cq /n /m "Visualisation completed. Press [C] to clean the system or [Q] to abort: "
+if %errorlevel% equ 2 exit /b
 
 echo.
 echo ========================================
