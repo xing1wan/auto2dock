@@ -31,23 +31,20 @@ This repository provides an automated workflow for high-throughput molecular doc
 
 - `scripts/`: Contains custom Python helpers:
 
+  - `00-06.py`: Download crystalised structure from PDB using text search, and select the most similar reference for your protein.
 
   - `split_check.py`: Logic for alternate conformation handling.
-  
-  
+    
   - `analyse_vina.py`: Spatial analysis and CSV generation script.
-
+ 
+  - `visualise_vina.py`: Visualise the districution of 9 docking results from Vina.
 
 - `variables/`: Contains `settings.txt` (path configurations) and `variables.txt` (Vina search configurations).
 
-
-- `receptor/`: Input folder for raw PDB protein files.
-
+- `receptor/`: Input folder for your PDB protein files.
 
 - `sdf/`: Input folder for ligand files in `.sdf` format.
 
-
-- `reference/`: Folder to save the crystal structure as reference for your proteins
 
 ## 🛠️ **Setup & Usage**
 
@@ -97,10 +94,10 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
         ANACONDA_PYTHON=C:\ProgramData\anaconda3\python.exe
         ```
     
-    - Replace the your own crystal reference structure in the reference folder
+    - The crystal reference structure will be selected by `preclean_pdb.bat` and saved in the reference folder
     e.g.
         ```
-        REF_PDB=.\reference\3o5b_pdb.ent
+        REF_PDB=.\reference\3o5b.pdb
         ```
     **‼️NOTE‼️This pipeline has been tested on MGL win32_1.5.7 (Python 2.7.11), Vina 1_1_2_win32, PyMOL 3.1.6.1, and Anaconda Navigator 2.7.0 (conda 24.11.3, Python 3.12.7)** 
 
@@ -108,7 +105,7 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
 
 ### ***2. Define Search Space***
 
-Set your docking box coordinates (center and dimensions) in `.\variables\variables.txt`.
+Set your docking search grid dimensions in `.\variables\variables.txt`. The centroid of the ligand is calculated by `preclean_pdb.bat`
 
 ### ***3. Run the Pipeline***
 
@@ -129,7 +126,15 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 
 ## 📊 **Outputs**
 
+`pdb`: Raw PDB files downloaded on command from PDB database.
+
+`pdb_clean`: Clean PDB monomers with similar protein length to your protein.
+
+`prep_results`: Structural comparison between clean PDBs and your protein, identified ligands, and coordinates of centroid for docking.
+
 `receptor_out/`: Prepared PDBQT receptor files.
+
+`reference`: Best match crystal structure to your protein.
 
 `ligand`: Prepared PDB ligand files from `.sdf` format.
 
@@ -138,6 +143,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
