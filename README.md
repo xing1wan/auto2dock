@@ -4,11 +4,11 @@ This repository provides an automated workflow for high-throughput molecular doc
 
 ## 🚀 **Key Features**
 
+- Raw data retrieving: `preclean_pdb.bat` script serves as an automated, end-to-end orchestration pipeline that manages local environment setup, interactive RCSB PDB data retrieval, and multi-stage structural refinement—including chain-specific cleaning, coordinate-frame alignment, and RMSD-based receptor selection—to prepare standardized protein structures for molecular docking.
+
 - Intelligent Receptor Pre-processing: Automatically detects alternate conformations in PDB files using `split_check.py`. If multiple conformations are found, it isolates the primary conformation (_A) to ensure docking consistency.
 
-
 - Standardized Ligand Preparation: Converts SDF files to PDB via PyMOL and prepares them into PDBQT format using MGLTools, including the addition of Gasteiger charges.
-
 
 - High-Throughput Docking: A centralized Windows Batch script (`automated_docking.bat`) manages the entire flow, executing AutoDock Vina across all receptor-ligand combinations.
 
@@ -155,6 +155,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
