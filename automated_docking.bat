@@ -17,38 +17,6 @@ for /f "delims=" %%a in (%EXE_CONF%) do (
     set "%%a"
 )
 
-@REM :: --- LOGGING SETUP ---
-@REM :: Create the LOG folder if it doesn't exist (provided by your external variable)
-@REM if not exist "%LOG%" mkdir "%LOG%"
-
-@REM :: Get date in YYYYMMDD format (depends on system locale, usually works for most)
-@REM set "t_date=%date:~10,4%%date:~4,2%%date:~7,2%"
-
-@REM :: Get time and handle the leading space if the hour is < 10
-@REM set "t_time=%time: =0%"
-@REM set "t_time=%t_time:~0,2%%t_time:~3,2%"
-
-@REM :: Combine them into a single stamp
-@REM set "STAMP=%t_date%_%t_time%"
-
-@REM :: Define the log filename with a timestamp (optional) to avoid overwriting
-@REM set "LOG_FILE=%LOG%\docking_log_%STAMP%.txt"
-
-@REM echo [INFO] Pipeline started. Logging to %LOG_FILE%
-
-@REM :: CALL the logic block and redirect its output
-@REM call :main_logic > "%LOG_FILE%" 2>&1
-
-@REM echo [INFO] Pipeline Finished.
-@REM pause
-@REM exit /b
-
-@REM :: ====================================================
-@REM :: EVERYTHING BELOW THIS LINE GOES INTO THE LOG
-@REM :: ====================================================
-@REM :main_logic
-@REM echo Run started at: %date% %time%
-
 :: Verify paths were loaded [cite: 2]
 echo Using MGL python: %MGL_PYTHON%
 echo Using PyMOL: %PYMOL_EXE%
@@ -229,8 +197,5 @@ echo ========================================
 echo Docking Complete! Check the '%OUTPUT_DIR%' folders.
 echo Then you can continue with automated_analysis.bat.
 echo ========================================
-
-@REM goto :eof
-
 
 pause
