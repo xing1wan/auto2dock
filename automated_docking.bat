@@ -104,6 +104,39 @@ echo STEP 2: Preparing Receptors (PDBQT)
 echo ========================================
 
 :: --- PROCESS PROTEINS ---
+for %%P in ("%RECEPTOR_DIR%\*.cif") do (
+    set "FILE_EXT=%%~xP"
+    set "BASENAME=%%~nP"
+    set "FULL_PATH=%%~fP"
+    
+    if /I "!FILE_EXT!"==".cif" (
+        echo [CIF DETECTED] Aligning and converting !BASENAME!.cif to PDB...
+        
+        :: 1. Load TARGET 
+        :: 2. Load the current CIF
+        :: 3. Superimpose CIF to TARGET
+        :: 4. Save the aligned object as PDB
+        "%PYMOL_EXE%" -c -d "load %TARGET%, ref; load %%~fP, obj; super obj, ref; save %RECEPTOR_DIR%\!BASENAME!.pdb, obj" >nul
+        
+        :: Update the path to point to the newly created, ALIGNED PDB
+        set "FULL_PATH=%RECEPTOR_DIR%\!BASENAME!.pdb"
+    )
+)
+
+set "FILE_COUNT=0"
+for %%A in ("%RECEPTOR_DIR%\*.cif") do set /a FILE_COUNT+=1
+:: Small pause to let the OS release the file handle 
+:: Calculate timeout: 1/5 second per file, minimum 5 seconds, change denominator to change the time of waiting
+set /a "TIMEOUT_VAL=%FILE_COUNT% * 1 / 2"
+if %TIMEOUT_VAL% LSS 5 set "TIMEOUT_VAL=5"
+
+for /L %%i in (1,1,%TIMEOUT_VAL%) do (
+    <nul set /p "=."
+    timeout /t 1 /nobreak >nul
+)
+
+echo.
+
 for %%P in ("%RECEPTOR_DIR%\*.pdb") do (
     :: Define the expected output path for checking
     set "OUT_FILE=%RECP_OUT%\%%~nP.pdbqt"
