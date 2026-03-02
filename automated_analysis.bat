@@ -4,8 +4,6 @@ setlocal enabledelayedexpansion
 :: ==============================================================
 :: CONFIGURATION: PASTE YOUR anaconda and PYMOL INSTALL PATH HERE
 :: ==============================================================
-@REM set "PYMOL_EXE=C:\Users\wanx1\AppData\Local\pymol\PyMOLWin.exe"
-@REM set "CONDA_BAT=C:\ProgramData\anaconda3\condabin\conda.bat"
 set "EXE_CONF=.\variables\settings.txt"
 if not exist "%EXE_CONF%" (
     echo [ERROR] %EXE_CONF% not found!
@@ -20,7 +18,6 @@ for /f "delims=" %%a in (%EXE_CONF%) do (
 :: Verify paths were loaded [cite: 2]
 echo Using MGL python: %MGL_PYTHON%
 echo Using PyMOL: %PYMOL_EXE%
-echo Using MGL: %MGL_PYTHON%
 echo Utilities are in: %UTILS%
 echo Using Vina: %VINA%
 echo Using conda: %CONDA_BAT%
@@ -114,3 +111,4 @@ echo.
 echo Process Complete. Temporary environment removed.
 
 pause
+
