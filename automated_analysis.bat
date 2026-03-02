@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: ==============================================================
-:: CONFIGURATION: PASTE YOUR annaconda and PYMOL INSTALL PATH HERE
+:: CONFIGURATION: PASTE YOUR anaconda and PYMOL INSTALL PATH HERE
 :: ==============================================================
 @REM set "PYMOL_EXE=C:\Users\wanx1\AppData\Local\pymol\PyMOLWin.exe"
 @REM set "CONDA_BAT=C:\ProgramData\anaconda3\condabin\conda.bat"
@@ -57,7 +57,7 @@ if not exist "%PYMOL_EXE%" (
 
 if not exist "%CONDA_BAT%" (
     echo [ERROR] Could not find conda [cite: 2]
-    echo Please check annaconda installation.
+    echo Please check anaconda installation.
     pause
     exit /b
 )
@@ -112,4 +112,5 @@ call "%CONDA_BAT%" remove -n %ENV_NAME% --all -y -q
 
 echo.
 echo Process Complete. Temporary environment removed.
+
 pause
