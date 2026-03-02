@@ -20,7 +20,6 @@ for /f "delims=" %%a in (%EXE_CONF%) do (
 :: Verify paths were loaded [cite: 2]
 echo Using MGL python: %MGL_PYTHON%
 echo Using PyMOL: %PYMOL_EXE%
-echo Using MGL: %MGL_PYTHON%
 echo Utilities are in: %UTILS%
 echo Using Vina: %VINA%
 echo Using conda: %CONDA_BAT%
@@ -199,3 +198,4 @@ echo Then you can continue with automated_analysis.bat.
 echo ========================================
 
 pause
+
