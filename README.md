@@ -58,7 +58,7 @@ Edit `.\variables\settings.txt` to define your local installation paths for:
   
   - VINA: Path to AutoDock Vina executable.
   
-  - You need to have the following installed: [MGL tools](https://ccsb.scripps.edu/mgltools/downloads/), [PyMOL](https://www.pymol.org/), [Vina](https://vina.scripps.edu/downloads/) (There is a copy in the repo for vina, in case downloading from the link was difficult), and [Anaconda](https://www.anaconda.com/download])
+  - You need to have the following installed: [MGL tools](https://ccsb.scripps.edu/mgltools/downloads/), [PyMOL](https://www.pymol.org/), [Vina](https://vina.scripps.edu/downloads/) (There is a copy in the repo for vina, in case downloading from the link was difficult), and [Anaconda](https://www.anaconda.com/download)
 
     - Find in MGL installation path the python.exe and Utilities24 folder, replace the texts in settings.txt
     e.g.
@@ -153,6 +153,7 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 `output/`: Subfolders for each receptor containing `_out.pdbqt` docking results.
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
+
 
 
 
