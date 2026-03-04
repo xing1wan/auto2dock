@@ -154,6 +154,10 @@ Run the analysis script `automated_analysis.bat` to compile results into a maste
 
 `results/`: Comprehensive CSV reports containing affinities and spatial metrics.
 
+## ✏️ **Citation**
+```
+Wan, X. (2026). auto2dock (Version 2.0.0) [Computer software]. https://github.com/xing1wan/auto2dock
+```
 
 
 
