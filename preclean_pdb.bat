@@ -83,6 +83,24 @@ pause
 echo.
 echo [INFO] Starting Receptor Pre-Cleaning Pipeline...
 
+@REM echo.
+@REM echo ====================================================
+@REM echo PIPELINE CONTROL
+@REM echo ====================================================
+@REM echo [C] Continue with Step 01: PDB Cleaning
+@REM echo [S] Skip Step 01 and jump to Step 02: Superimposition
+@REM echo [Q] Quit Pipeline
+@REM echo.
+
+@REM choice /c csq /n /m "Select an option [C, S, Q]: "
+
+@REM if %errorlevel% equ 3 exit /b
+@REM if %errorlevel% equ 2 (
+@REM     echo [INFO] Skipping Step 01 as requested.
+@REM     goto :step02
+@REM )
+
+@REM :step01
 echo ====================================================
 echo PRE-CLEANING STEP 01: PDB CLEANING AND FILTERING
 echo ====================================================
@@ -98,7 +116,7 @@ for %%A in ("%RAW_PDB_DIR%\*.pdb" "%RAW_PDB_DIR%\*.ent") do set /a FILE_COUNT+=1
 "%PYMOL_EXE%" -c -k -r "%SCR_DIR%\01_clean_pdbs.py" 
 :: Small pause to let the OS release the file handle 
 :: Calculate timeout: 1/5 second per file, minimum 5 seconds, change denominator to change the time of waiting
-set /a "TIMEOUT_VAL=%FILE_COUNT% * 1 / 5"
+set /a "TIMEOUT_VAL=%FILE_COUNT% * 1/5 "
 if %TIMEOUT_VAL% LSS 5 set "TIMEOUT_VAL=5"
 
 echo [INFO] Cleaning PDB files: 
@@ -107,11 +125,8 @@ for /L %%i in (1,1,%TIMEOUT_VAL%) do (
     timeout /t 1 /nobreak >nul
 )
 
-@REM dir %CLEAN_OUT%
-@REM echo.
-@REM echo [STEP 01 COMPLETE] Check %CLEAN_OUT% for results.
-@REM pause
-
+:: Add this label before Step 02 starts
+@REM :step02
 echo.
 echo ====================================================
 echo PRE-CLEANING STEP 02: BATCH SUPERIMPOSITION
@@ -120,6 +135,8 @@ echo [2/6] Superimpositing Clean PDBs to Your Target %TARGET% ...
 :: Arguments: 1=Input(clean), 2=Settings, 3=Output CSV
 "%PYMOL_EXE%" -c -k -r "%SCR_DIR%\02_batch_superimposition.py"
 :: Small pause to let the OS release the file handle 
+:: Calculate timeout: 1/5 second per file, minimum 5 seconds, change denominator to change the time of waiting
+set /a "TIMEOUT_VAL=%FILE_COUNT% * 1/5 "
 echo [INFO] Superimpositing PDBs: 
 for /L %%i in (1,1,%TIMEOUT_VAL%) do (
     <nul set /p "=."
